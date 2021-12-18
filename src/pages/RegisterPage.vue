@@ -66,24 +66,6 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-
-      <b-form-group
-        id="input-group-country"
-        label-cols-sm="3"
-        label="Country:"
-        label-for="country"
-      >
-        <b-form-select
-          id="country"
-          v-model="$v.form.country.$model"
-          :options="countries"
-          :state="validateState('country')"
-        ></b-form-select>
-        <b-form-invalid-feedback>
-          Country is required
-        </b-form-invalid-feedback>
-      </b-form-group>
-
       <b-form-group
         id="input-group-Password"
         label-cols-sm="3"
@@ -115,27 +97,6 @@
       </b-form-group>
 
       <b-form-group
-        id="input-group-confirmedPassword"
-        label-cols-sm="3"
-        label="Confirm Password:"
-        label-for="confirmedPassword"
-      >
-        <b-form-input
-          id="confirmedPassword"
-          type="password"
-          v-model="$v.form.confirmedPassword.$model"
-          :state="validateState('confirmedPassword')"
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="!$v.form.confirmedPassword.required">
-          Password confirmation is required
-        </b-form-invalid-feedback>
-        <b-form-invalid-feedback
-          v-else-if="!$v.form.confirmedPassword.sameAsPassword">
-          The confirmed password is not equal to the original password
-        </b-form-invalid-feedback>
-      </b-form-group>
-
-      <b-form-group
         id="input-group-email"
         label-cols-sm="3"
         label="Email:"
@@ -155,23 +116,6 @@
           v-else-if="!$v.form.email.email"
         >
           Please enter correct email
-        </b-form-invalid-feedback>
-      </b-form-group>
-
-      <b-form-group
-        id="input-group-imageUrl"
-        label-cols-sm="3"
-        label="ImageUrl"
-        label-for="imageUrl"
-      >
-        <b-form-input
-          id="imageUrl"
-          v-model="$v.form.imageUrl.$model"
-          type="text"
-          :state="validateState('imageUrl')"
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="!$v.form.imageUrl.required">
-          ImageUrl is required
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -222,26 +166,21 @@ import {
   minLength,
   maxLength,
   alpha,
-  sameAs,
   email
 } from "vuelidate/lib/validators";
 
 export default {
-  name: "Register",
+  name: "RegisterUser",
   data() {
     return {
       form: {
         username: "",
         firstName: "",
         lastName: "",
-        country: null,
         password: "",
-        confirmedPassword: "",
         email: "",
-        imageUrl: "",
         submitError: undefined
       },
-      countries: [{ value: null, text: "", disabled: true }],
       errors: [],
       validated: false
     };
@@ -252,9 +191,6 @@ export default {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
         alpha
-      },
-      country: {
-        required
       },
       firstName: {
         required,
@@ -270,19 +206,10 @@ export default {
         ContainsNumber,
         ContainsSpecialChar
       },
-      confirmedPassword: {
-        required,
-        sameAsPassword: sameAs("password")
-      },
       email: {
         required,
         email
       },
-      imageUrl: {
-        required,
-        length: (p) => minLength(1)(p) && maxLength(255)(p),
-
-      }
     }
   },
   mounted() {
@@ -297,18 +224,18 @@ export default {
     },
     async Register() {
       try {
-        const response = await this.axios.post(
-          "http://localhost:3003/Register",
-          {
-            username: this.form.username,
-            firstname: this.form.firstName,
-            lastname: this.form.lastName,
-            country: this.form.country,
-            password: this.form.password,
-            email: this.form.email,
-            imageurl: this.form.imageUrl
-          }
-        );
+        // const response = await this.axios.post(
+        //   "http://localhost:3003/Register",
+        //   {
+        //     username: this.form.username,
+        //     firstname: this.form.firstName,
+        //     lastname: this.form.lastName,
+        //     country: this.form.country,
+        //     password: this.form.password,
+        //     email: this.form.email,
+        //     imageurl: this.form.imageUrl
+        //   }
+        // );
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {

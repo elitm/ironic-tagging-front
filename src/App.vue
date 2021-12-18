@@ -26,8 +26,8 @@ export default {
   color: #2c3e50;
   min-height: 100vh;
     background: 
-  linear-gradient(rgba(141, 197, 158, 0.5), 
-  rgba(139, 206, 150, 0.5)), 
+  linear-gradient(rgba(234, 240, 236, 0.5), 
+  rgba(252, 252, 252, 0.5)), 
   url("./assets/background.jpg");
   background-repeat: no-repeat;
   background-size: cover  
@@ -39,10 +39,10 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #b47846;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #eb7311;
 }
 </style>
