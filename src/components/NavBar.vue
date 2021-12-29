@@ -15,8 +15,18 @@
         <button class="btn navB" type="button">
           <router-link :to="{ name: 'main' }">Home</router-link>
         </button>
-
+        <b-dropdown id="dropdown-politicians"  text="Politicians" class="mr-1" variant="light" >
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Naftali Bennett`}}"> Naftali Bennett</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Benjamin Netanyahu`}}"> Bibi Netanyahu</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Benny Gantz`}}"> Benny Gantz</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Nitzan Horowitz`}}"> Nitzan Horowitz</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Yair Lapid`}}"> Yair Lapid</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Avigdor Liberman`}}"> Avigdor Liberman</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Merav Michaeli`}}"> Merav Michaeli</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'politician' , params: {name: `Amir Peretz`}}"> Amir Peretz</b-dropdown-item>
+          </b-dropdown>
         <b-navbar-nav class="navbar-nav ml-auto">
+ 
         <span v-if="!$root.store.username">
             <B>Hello Guest</B>
           <button class="btn navB" type="button">
@@ -24,6 +34,7 @@
           </button>
           <button class="btn navB" type="button">
             <router-link :to="{ name: 'login' }">Login</router-link>
+
           </button>
           
         </span>
