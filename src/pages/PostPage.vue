@@ -1,6 +1,7 @@
 <template>
 <div>
     <Post></Post>
+    <LabelPost> </LabelPost>
     <Comment
         v-for="c in comments"
         :commenter_name="c.commenter_name"
@@ -21,10 +22,12 @@
 <script>
 import Post from "../components/Post.vue"
 import Comment from "../components/Comment.vue"
+import LabelPost from "../components/LabelPost.vue"
 export default {
   components:{
     Post,
-    Comment
+    Comment,
+    LabelPost
   },
     data() {
         return {
