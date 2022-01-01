@@ -1,7 +1,11 @@
 <template>
 <div>
+  <b-card class="post">
     <Post></Post>
     <LabelPost> </LabelPost>
+  </b-card>
+  <br>
+  <br>
     <Comment
         v-for="c in comments"
         :commenter_name="c.commenter_name"
@@ -65,4 +69,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.post{
+    margin: 4%,10%,4%,4%;
+    border-radius:65px;
+    background-color: rgb(176, 202, 250);
+}
 </style>

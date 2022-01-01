@@ -25,11 +25,11 @@ export default {
   color: #2c3e50;
   min-height: 100vh;
     background: 
-  linear-gradient(rgba(141, 197, 158, 0.5), 
-  rgba(139, 206, 150, 0.5)), 
-  // url("./assets/background.jpg");
-  // background-repeat: no-repeat;
-  // background-size: cover  
+  // linear-gradient(rgba(245, 201, 151, 0.89), 
+  // rgba(255, 177, 87, 0.74)), 
+  url("./assets/back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover  
 }
 
 #nav {

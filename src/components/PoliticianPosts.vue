@@ -1,13 +1,16 @@
 <template>
   <div>
-      <h1> {{name}}</h1>
+      <h1 class="head"> {{name}}</h1>
+    <b-container> 
+      <b-row>
     <PostPreview
         v-for="p in posts"
         :postId="p.post_id"
         :date="p.created_time"
         :key="p.post_id">
     </PostPreview>
-
+    </b-row>
+  </b-container> 
   </div>
 </template>
 
@@ -60,4 +63,13 @@ export default {
 
 </script>
 
-<style></style>
+<style>
+.head{
+  margin: auto;
+  width:400px;
+  height: 100px;
+  vertical-align: middle;
+  color:black;
+}
+
+</style>

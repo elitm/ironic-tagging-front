@@ -3,7 +3,9 @@
     <p> date: {{ date.replace('T', ' ').substring(0,16) }}  <br>
         post id: {{post_id}}, <br>
         politician name: {{politician_name}}, <br>
+        <br>
         message: {{message}},<br>
+        <br>
         url: <a :href="url" target="_blank">{{ url }}</a>
         
         <span v-if="attachment_type"> 
