@@ -62,8 +62,8 @@
         async Logout() {
         console.log("try to logging out");
         try{
-          // const response = await this.axios.post(
-          //   "http://localhost:3003/logout",{withCredentials:true});
+          await this.axios.post(
+            "http://localhost:3000/logout",{withCredentials:true});
 
           this.$root.store.logout();
           this.$root.toast("Logout", "User logged out successfully", "success");
@@ -76,11 +76,6 @@
           console.log(error)
         }
     }, 
-      async logoutFromServer(){
-            await this.axios.post(
-            "http://localhost:3003/logout",
-        );
-    }  
 
   }};
 </script>

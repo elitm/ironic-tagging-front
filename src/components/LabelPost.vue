@@ -1,5 +1,5 @@
 <template>
-    <div class="label">
+    <div class="label" dir="rtl">
     <form class="label-form">
         <div class="form-group">
             <label>נושא הפוסט</label>
@@ -37,7 +37,7 @@
             <label>מסרים ריגושיים</label>
             <select required v-model="emotion" multiple data-live-search="true">
                 <option>האדרה עצמית</option>
-                <option>מסר חיובי לכבי תומכי הפוליטיקאי</option>
+                <option>מסר חיובי לגבי תומכי הפוליטיקאי</option>
                 <option>מסר חיובי לגבי העם (או חלק ממנו) והמדינה</option>
                 <option>מסר חיובי לגבי מדינות אחרות או מנהיגיהן</option>
                 <option>מסר שלילי לגבי פוליטיקאי/ים יריב/ים</option>
@@ -55,9 +55,9 @@
         </div>
         <div class="form-group">
             <label>טקסט חופשי</label>
-            <input type="text" class="form-control" id="free_text" v-model="free_text">
+            <textarea class="form-control" rows="3" id="free_text" v-model="free_text"/>
         </div>
-        <button type="submit" class="btn btn-primary" @click="labelPost()">Submit</button>
+        <button type="submit" class="btn btn-primary"  @click="labelPost()">Submit</button>
         </form>
     </div>
 </template>
@@ -67,10 +67,10 @@ export default {
   name: "LabelPost",
     data(){
         return{
-            subject: "",
-            style:"",
-            emotion:"",
-            free_text: ""
+            subject: [],
+            style:[],
+            emotion:[],
+            free_text: "",
 
         };
     }, 
@@ -78,7 +78,6 @@ export default {
     async labelPost(){
      try {
        console.log("label post");
-       console.log(this.subject)
         this.axios.defaults.withCredentials = true;
         await this.axios.post(
           "http://localhost:3000/posts/labelPost",
@@ -93,7 +92,6 @@ export default {
      this.$root.toast("Label Post", "Post labeled successfully", "success");
       } 
       catch (error) {
-        console.log("error in add event")
         console.log(error);
         // this.$root.toast("", error.response.data, "warning");
       }
@@ -104,4 +102,5 @@ export default {
 </script>
 
 <style>
+.form-control { width: 50%; }
 </style>

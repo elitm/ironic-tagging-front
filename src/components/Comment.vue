@@ -1,36 +1,40 @@
 <template>
-    <div class="comment">
-    <p class="regular" v-if="!parent_comment_id"> 
+    <div class="comment" dir="rtl">
+    <p class="regular" v-if="!parent_comment_id" > 
         <b-card class="comm">
-        commenter_name: <a :href="commenter_url" target="_blank">{{commenter_name}}</a>
-        message: {{message}}, <br>
-        comment_url: <a :href="comment_url" target="_blank">{{ comment_url }}</a>
-        date: {{ date.replace('T', ' ').substring(0,16)}},
-        likes: {{likes}},
-        num_of_replies: {{num_of_replies}}
+
+        {{ date.replace('T', ' ').substring(0,16)}}
         <br>
-        <input type="checkbox" id="ironic" v-model="checked">
-        <label for="ironic">האם אירוני?</label>
-        <br>
+        <a :href="commenter_url" target="_blank">{{commenter_name}}</a>:
+
+
+        <h5> {{message}} </h5>
+         <a :href="comment_url" target="_blank"> קישור לתגובה</a> <br>
+
+        <b> לייקים</b>: {{likes}}
+        <b> תגוביות</b>: {{num_of_replies}}
+
         <LabelComments></LabelComments>
         </b-card>
-        ----------
     </p>
         
-        <p class="nested_comment" v-else style="margin-left:30px"> 
+        <p class="nested_comment" v-else style="margin-right:45px" > 
         <b-card class="nest">
-        commenter_name: <a :href="commenter_url" target="_blank">{{commenter_name}}</a>
-        message: {{message}}, <br>
-        comment_url: <a :href="comment_url" target="_blank">{{ comment_url }}</a>
-        date: {{ date.replace('T', ' ').substring(0,16)}},
-        likes: {{likes}},
-        num_of_replies: {{num_of_replies}}
+
+        {{ date.replace('T', ' ').substring(0,16)}}
         <br>
-        <input type="checkbox" id="ironic" v-model="checked">
-        <label for="ironic">האם אירוני?</label>
-        <br>
+        <a :href="commenter_url" target="_blank">{{commenter_name}}</a>:
+
+
+        <h5> {{message}} </h5>
+         <a :href="comment_url" target="_blank"> קישור לתגובה</a> <br>
+
+        <b> לייקים</b>: {{likes}}
+        <b> תגוביות</b>: {{num_of_replies}}
+
+        <LabelComments></LabelComments>
         </b-card>
-        ----------
+        
     </p>    
     </div>
 </template>
@@ -68,7 +72,7 @@ export default {
             required: true
         },
         num_of_replies:{
-            type: String
+            type: Number
         },
         comment_id:{
             type: String,
@@ -91,9 +95,14 @@ export default {
 .comm{
     border-radius:25px;
     background-color: rgb(171, 233, 241);
+    /* width:fit-content; */
+    text-align: right;
 }
 .nest{
     border-radius:25px;
     background-color: rgb(192, 245, 232);
+    /* width:fit-content; */
+    text-align: right;
+
 }
 </style>

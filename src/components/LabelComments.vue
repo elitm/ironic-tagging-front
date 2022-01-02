@@ -1,63 +1,61 @@
 <template>
     <div class="label">
-    <form class="label-form">
+    <form class="label-form" dir="rtl">
         <div class="form-group">
-            <label>נושא התגובה</label>
-            <select required v-model="subject" multiple data-live-search="true">
-                <option>פוליטי-ציבורי</option>
-                <option>פוליטיקה פנימית</option>
-                <option>יחסי חוץ</option>
-                <option>ביטחון</option>
-                <option>כלכלה</option>
-                <option>חינוך</option>
-                <option>חברה</option>
-                <option>תחבורה</option>
-                <option>בריאות</option>
-                <option>קורונה</option>
-                <option>אישי</option>
-                <option>משפחה</option>
-                <option>חברים</option>
-                <option>תחביבים ופנאי</option>
-                <option>משפט (נתניהו)</option>
-            </select>  
-            <label>סגנון התגובה</label>
-            <select required v-model="style" multiple data-live-search="true">
-                <option>ריגושיות חיובית</option>
-                <option>ריגושיות שלילית-לעומתית</option>
-                <option>בוז ולעג</option>
-                <option>אירוניה</option>
-                <option>רצינות</option>
-                <option>קלילות</option>
-                <option>רשמיות</option>
-                <option>פמיליאריות</option>
-                <option>משלב גבוה</option>
-                <option>משלב יומיומי/סלנג</option>
-                <option>אחר</option>
+             <br>
+        <label for="ironic">האם אירוני?</label>
+                <input type="checkbox" id="ironic" v-model="is_ironic" required >
+
+            <label> מיקום האירוניה </label>
+            <select required v-model="place">
+                <option>כל התגובית</option>
+                <option>חלק מהתגובית</option>
+                <option>לא ברור</option>
             </select> 
-            <label>מסרים ריגושיים</label>
-            <select required v-model="emotion" multiple data-live-search="true">
-                <option>האדרה עצמית</option>
-                <option>מסר חיובי לכבי תומכי הפוליטיקאי</option>
-                <option>מסר חיובי לגבי העם (או חלק ממנו) והמדינה</option>
-                <option>מסר חיובי לגבי מדינות אחרות או מנהיגיהן</option>
-                <option>מסר שלילי לגבי פוליטיקאי/ים יריב/ים</option>
-                <option>מסר שלילי לגבי המחנה היריב</option>
-                <option>מסר שלילי לגבי חלק מהעם</option>
-                <option>מסר שלילי לגבי מדינות אויב וגופי טרור או מנהיגיהם   </option>
-                <option>בריאות</option>
-                <option>קורונה</option>
-                <option>אישי</option>
-                <option>משפחה</option>
-                <option>חברים</option>
-                <option>תחביבים ופנאי</option>
-                <option>משפט (נתניהו)</option>
+            <br>
+            <label> אם חלק מהתגובית, איזה חלק מעיד על אירוניה?</label>
+            <input type="text" id="expression" v-model="expression" size="50px">
+             <label>סוג האירוניה</label>
+            <select required v-model="ironyType" multiple data-live-search="true">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+
+
+            </select>
+             <label> קורבנות האירוניה</label>
+             <select required v-model="ironyType" multiple data-live-search="true">
+                <option>נפתלי בנט</option>
+                <option>בני גנץ</option>
+                <option>ניצן הורוביץ</option>
+                <option>אביגדור ליברמן</option>
+                <option>יאיר לפיד</option>
+                <option>מרב מיכאלי</option>
+                <option>בנימין נתניהו</option>
+                <option>עמיר פרץ</option>       
+                <option>אירוניה עצמית</option>
+                <option>אחר</option>
+
             </select>  
-        </div>
-        <div class="form-group">
+
+            <br>
+            <label>חשוד כלא אותנטי (בוט, בשכר)</label>
+            <div class="form-check form-check-inline">
+            <input required v-model="not_authentic" type="radio" id="not_authentic" value="true">
+            <label class="form-check-label" >כן</label>
+            <input required v-model="not_authentic" type="radio" id="not_authentic" value="false">
+            <label class="form-check-label" >לא</label>
+            </div> 
+
+            <label> למה? </label>
+            <input type="text" div class="col-xs-2" id="why_not_authentic" v-model="why_not_authentic" size="10px">
+            <br>
             <label>טקסט חופשי</label>
-            <input type="text" class="form-control" id="free_text" v-model="free_text">
-        </div>
-        <button type="submit" class="btn btn-primary" @click="labelPost()">Submit</button>
+            <textarea class="form-control" rows="1" id="free_text" v-model="free_text"/>
+            <br>
+        <button type="submit" class="btn btn-primary" @click="labelComment()">Submit</button>
+                </div>
         </form>
     </div>
 </template>
@@ -66,10 +64,13 @@ export default {
       name: "LabelComments",
     data(){
         return{
-            subject: "",
-            style:"",
-            emotion:"",
-            free_text: ""
+            is_ironic: "",
+            place:"",
+            expression:"",
+            not_authentic:"",
+            why_not_authentic: "",
+            ironyType: [],
+            free_text:""
 
         };
     }

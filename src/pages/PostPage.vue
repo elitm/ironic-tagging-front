@@ -46,7 +46,6 @@ export default {
           `http://localhost:3000/comments/getCommentsOfPost/${postId}`,
             
         );
-        console.log(response.data)
         const comments = response.data;
         if (typeof (response.data) !== 'string')          
         {
@@ -73,5 +72,7 @@ export default {
     margin: 4%,10%,4%,4%;
     border-radius:65px;
     background-color: rgb(176, 202, 250);
+    text-align: right;
+  
 }
 </style>

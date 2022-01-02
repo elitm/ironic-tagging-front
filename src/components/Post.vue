@@ -1,27 +1,30 @@
 <template>
-    <div class="post">
-    <p> date: {{ date.replace('T', ' ').substring(0,16) }}  <br>
-        post id: {{post_id}}, <br>
-        politician name: {{politician_name}}, <br>
+    <div class="post" dir="rtl">
+     {{ date.replace('T', ' ').substring(0,16) }}  <br>
+        <!-- post id: {{post_id}}, <br> -->
+        <h6>{{politician_name}}:</h6> 
         <br>
-        message: {{message}},<br>
+        <h5> {{message}}</h5>
+        <a :href="url" target="_blank"> קישור לפוסט </a>
         <br>
-        url: <a :href="url" target="_blank">{{ url }}</a>
         
         <span v-if="attachment_type"> 
         <!-- attachment url: {{attachment_url}}, <br> -->
-         attachment type: {{attachment_type}}, <br>
+         סוג הפוסט: {{attachment_type}} <br>
         </span>
-        number of comments: {{num_of_comments}},
-        number of shares: {{num_of_shares}},
-        number of reactions: {{num_of_reactions}},
-        like: {{like}},
-        haha: {{haha}},
-        angry: {{angry}},
-        wow: {{wow}},
-        love: {{love}},
-        sad: {{sad}}
-    </p>
+        <b> תגובות</b>: {{num_of_comments}}
+        <b> שיתופים</b>: {{num_of_shares}}
+        <b> לייקים</b>: {{num_of_reactions}}
+        <br>
+        👍: {{like}}
+        😆: {{haha}}
+        😡: {{angry}}
+        😮: {{wow}}
+        ❤️: {{love}}
+        ☹️: {{sad}}
+        <br>
+        <br>
+        <br>
     </div>
 </template>
 
@@ -53,8 +56,6 @@ export default {
             try{
             const response = await this.axios.get(
                 `http://localhost:3000/posts/getPostFromId/${postId}`,);
-            console.log(response);
-
             this.post_id = response.data[0].post_id;
             this.politician_name = response.data[0].politician_name;
             this.message = response.data[0].message;
