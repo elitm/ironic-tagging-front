@@ -14,7 +14,13 @@
         <b> לייקים</b>: {{likes}}
         <b> תגוביות</b>: {{num_of_replies}}
 
-        <LabelComments></LabelComments>
+        <!-- <LabelComments></LabelComments> -->
+        <button type="button" @click="add">Add Expression</button>
+           <Labelcomponent
+                v-for="(component, index) in Labelcomponent"
+                :key="index"
+                :is="component"
+            />
         </b-card>
     </p>
         
@@ -32,7 +38,13 @@
         <b> לייקים</b>: {{likes}}
         <b> תגוביות</b>: {{num_of_replies}}
 
-        <LabelComments></LabelComments>
+        <!-- <LabelComments></LabelComments> -->
+          <button type="button" @click="add">Add Expression</button>
+           <Labelcomponent
+                v-for="(component, index) in Labelcomponent"
+                :key="index"
+                :is="component"
+            />
         </b-card>
         
     </p>    
@@ -44,6 +56,16 @@ import LabelComments from "./LabelComments.vue";
 export default {
     components:{
         LabelComments
+    },
+    data(){
+        return{
+          Labelcomponent: [LabelComments]  
+        };
+    },
+    methods:{
+      	add () {
+    	this.Labelcomponent.push(LabelComments)
+        }
     },
   name: "Comment",
   props:{
