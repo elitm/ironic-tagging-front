@@ -2,7 +2,7 @@
     <div class="post">
       <b-card class="Bcard">
     <div >
-      <router-link :to="{ name: 'posts' , params: {id: `${this.postId}`}}">
+      <router-link :to="{ name: 'posts' , params: {id: `${this.postId}`}, query: {category: this.category}}">
           <b>{{ postId }}</b> 
        </router-link>
     </div >
@@ -24,6 +24,9 @@ export default {
         required: true
 
       },
+      category:{
+        type: String,
+      }
   }, 
   mounted(){
   } 

@@ -1,13 +1,12 @@
 <template>
-    <div class="comment" dir="rtl">
+    <div class="comment" dir="rtl" v-if="this.category">
+
     <p class="regular" v-if="!parent_comment_id" > 
         <b-card class="comm">
 
         {{ date.replace('T', ' ').substring(0,16)}}
         <br>
         <a :href="commenter_url" target="_blank">{{commenter_name}}</a>:
-
-
         <h5> {{message}} </h5>
          <a :href="comment_url" target="_blank"> קישור לתגובה</a> <br>
 
@@ -30,8 +29,6 @@
         {{ date.replace('T', ' ').substring(0,16)}}
         <br>
         <a :href="commenter_url" target="_blank">{{commenter_name}}</a>:
-
-
         <h5> {{message}} </h5>
          <a :href="comment_url" target="_blank"> קישור לתגובה</a> <br>
 
@@ -48,6 +45,7 @@
         </b-card>
         
     </p>    
+
     </div>
 </template>
 
@@ -59,7 +57,9 @@ export default {
     },
     data(){
         return{
-          Labelcomponent: [LabelComments]  
+          Labelcomponent: [LabelComments] ,
+        //   category: eval("this." + this.$route.query.category)
+ 
         };
     },
     methods:{
@@ -107,10 +107,25 @@ export default {
         },
         parent_comment_id:{
             type: String,
+        },
+
+        acknowledgements :{
+            type: Boolean
+        },
+        category:{
+            type: Boolean
         }
         
-    }
+    },
+
+    mounted() {
+        console.log("this." + this.$route.query.category)
+        this.category = eval("this." + this.$route.query.category)
+        console.log(this.category)
+        console.log(typeof(this.category))
+},
 };
+
 </script>
 
 <style>
@@ -125,6 +140,9 @@ export default {
     background-color: rgb(192, 245, 232);
     /* width:fit-content; */
     text-align: right;
+}
 
+.comment{
+    background-color: deeppink;
 }
 </style>

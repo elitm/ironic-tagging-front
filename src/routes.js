@@ -18,7 +18,7 @@ const routes = [
     component: () => import("./pages/LoginPage")
   },
   {
-    path: "/politician/:name",
+    path: "/politician/:category/:name",
     name: "politician",
     component: () => import("./pages/PoliticianPage")
   },
@@ -27,9 +27,14 @@ const routes = [
     name: "posts",
     component: () => import("./pages/PostPage")
   },
+  {
+    path: "/categories/:name",
+    name: "categories",
+    component: () => import("./pages/CategoriesPage"),
+    props: true
+  },
 
-  
- 
+
   {
     path: "*",
     name: "notFound",

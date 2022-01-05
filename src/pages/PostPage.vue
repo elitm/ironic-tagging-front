@@ -18,6 +18,7 @@
         :comment_id="c.comment_id"
         :post_id="c.post_id"
         :parent_comment_id="c.parent_comment_id"
+        :acknowledgements="c.thanks_expression"
         :key="c.comment_id">
     </Comment>
 </div>

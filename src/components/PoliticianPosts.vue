@@ -7,6 +7,7 @@
         v-for="p in posts"
         :postId="p.post_id"
         :date="p.created_time"
+        :category="$route.params.category"
         :key="p.post_id">
     </PostPreview>
     </b-row>
@@ -55,9 +56,10 @@ export default {
 					
 			    },
 			  }, 
-    mounted(){
+  mounted(){
     console.log("politician posts mounted");
     this.getPoliticianPosts(this.$route.params.name); 
+    console.log(this.$route.params.category)
   }
 };
 

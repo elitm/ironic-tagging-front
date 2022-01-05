@@ -81,8 +81,7 @@ export default {
     },
     
   mounted(){
-      this.getPost(this.$route.params.id);
-  } 
+      this.getPost(this.$route.params.id);  } 
 };
 </script>
 
