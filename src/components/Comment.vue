@@ -1,8 +1,7 @@
 <template>
-    <div class="comment" dir="rtl" v-if="this.category">
+    <div dir="rtl" :class="this.category? 'categorialComment':'nonCategorialComment'">
 
-    <p class="regular" v-if="!parent_comment_id" > 
-        <b-card class="comm">
+        <b-card :class="parent_comment_id? 'nested_comment':'regular_comment'">
 
         {{ date.replace('T', ' ').substring(0,16)}}
         <br>
@@ -13,38 +12,13 @@
         <b> לייקים</b>: {{likes}}
         <b> תגוביות</b>: {{num_of_replies}}
 
-        <!-- <LabelComments></LabelComments> -->
         <button type="button" @click="add">Add Expression</button>
            <Labelcomponent
                 v-for="(component, index) in Labelcomponent"
                 :key="index"
                 :is="component"
             />
-        </b-card>
-    </p>
-        
-        <p class="nested_comment" v-else style="margin-right:45px" > 
-        <b-card class="nest">
-
-        {{ date.replace('T', ' ').substring(0,16)}}
-        <br>
-        <a :href="commenter_url" target="_blank">{{commenter_name}}</a>:
-        <h5> {{message}} </h5>
-         <a :href="comment_url" target="_blank"> קישור לתגובה</a> <br>
-
-        <b> לייקים</b>: {{likes}}
-        <b> תגוביות</b>: {{num_of_replies}}
-
-        <!-- <LabelComments></LabelComments> -->
-          <button type="button" @click="add">Add Expression</button>
-           <Labelcomponent
-                v-for="(component, index) in Labelcomponent"
-                :key="index"
-                :is="component"
-            />
-        </b-card>
-        
-    </p>    
+        </b-card>      
 
     </div>
 </template>
@@ -58,6 +32,7 @@ export default {
     data(){
         return{
           Labelcomponent: [LabelComments] ,
+          commentClassName: this.category
         //   category: eval("this." + this.$route.query.category)
  
         };
@@ -129,20 +104,26 @@ export default {
 </script>
 
 <style>
-.comm{
+.regular_comment{
     border-radius:25px;
     background-color: rgb(171, 233, 241);
-    /* width:fit-content; */
     text-align: right;
+    margin-top: 2%;
 }
-.nest{
+.nested_comment{
     border-radius:25px;
-    background-color: rgb(192, 245, 232);
-    /* width:fit-content; */
+    background-color: rgb(171, 233, 241); /*rgb(192, 245, 232);*/
     text-align: right;
+    margin-right: 45px;
+    margin-top: 2%;
 }
 
-.comment{
-    background-color: deeppink;
+.categorialComment{
+    background-color: rgb(255, 20, 20);
 }
+
+.nonCategorialComment{
+    background-color: rgb(255, 255, 255);
+}
+
 </style>
