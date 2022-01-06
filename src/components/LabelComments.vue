@@ -3,29 +3,16 @@
     <form class="label-form" dir="rtl">
         <div class="form-group">
              <br>
-        <label for="ironic">האם אירוני?</label>
-                <input type="checkbox" id="ironic" v-model="is_ironic" required >
-
-            <label> מיקום האירוניה </label>
-            <select required v-model="place">
-                <option>כל התגובית</option>
-                <option>חלק מהתגובית</option>
-                <option>לא ברור</option>
-            </select> 
-            <br>
-            <label> אם חלק מהתגובית, איזה חלק מעיד על אירוניה?</label>
-            <input type="text" id="expression" v-model="expression" size="50px">
-             <label>סוג האירוניה</label>
-            <select required v-model="ironyType" multiple data-live-search="true">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-
-
+             <label>עמדה אידיאולוגית:</label>
+             <br>
+             <label>בעד\נגד המגיב הקודם</label>
+            <select v-model="preComment" multiple data-live-search="true">
+                <option>בעד</option>
+                <option>נגד</option>
+                <option>אין התייחסות</option>
             </select>
-             <label> קורבנות האירוניה</label>
-             <select required v-model="ironyType" multiple data-live-search="true">
+             <label> בעד פוליטיקאי</label>
+             <select multiple data-live-search="true" v-model="WithPolitition" @change="checkvalue(this.value)">
                 <option>נפתלי בנט</option>
                 <option>בני גנץ</option>
                 <option>ניצן הורוביץ</option>
@@ -36,8 +23,61 @@
                 <option>עמיר פרץ</option>       
                 <option>אירוניה עצמית</option>
                 <option>אחר</option>
+            </select>
+            <input type="text" name="color" id="color" style='display:none;'/>
+            <label> נגד פוליטיקאי</label>
+             <select  multiple data-live-search="true" v-model="againstPolitition">
+                <option>נפתלי בנט</option>
+                <option>בני גנץ</option>
+                <option>ניצן הורוביץ</option>
+                <option>אביגדור ליברמן</option>
+                <option>יאיר לפיד</option>
+                <option>מרב מיכאלי</option>
+                <option>בנימין נתניהו</option>
+                <option>עמיר פרץ</option>       
+                <option>אירוניה עצמית</option>
+                <option>אחר</option>
+            </select> 
+            <label> בעד מפלגה</label>
+             <select multiple data-live-search="true" class="withParty" v-model="withParty">
+                <option>הימין החדש\ימינה</option>
+                <option>הליכוד</option>
+                <option>העבודה</option>
+                <option>חוסן לישראל</option>
+                <option>ישראל ביתנו</option>
+                <option>יש עתיד</option>
+                <option>כחול לבן</option>
+                <option>מרץ</option>       
+                <option class="other">אחר</option>
+            </select>
 
-            </select>  
+            <label> נגד מפלגה</label>
+             <select multiple data-live-search="true" class="againstParty" v-model="againstParty">
+                <option>הימין החדש\ימינה</option>
+                <option>הליכוד</option>
+                <option>העבודה</option>
+                <option>חוסן לישראל</option>
+                <option>ישראל ביתנו</option>
+                <option>יש עתיד</option>
+                <option>כחול לבן</option>
+                <option>מרץ</option>       
+                <option>אחר</option>
+            </select> 
+            <br>
+            <label>בעד מחנה\קבוצה</label> 
+            <select v-model="withGroup">
+                <option>הימין</option>
+                <option>השמאל</option>
+                <option>המרכז</option>
+                <option>אחר</option>
+            </select>
+            <label>נגד מחנה\קבוצה</label>
+            <select v-model="againstGroup">
+                <option>הימין</option>
+                <option>השמאל</option>
+                <option>המרכז</option>
+                <option>אחר</option>
+            </select> 
 
             <br>
             <label>חשוד כלא אותנטי (בוט, בשכר)</label>
@@ -47,7 +87,7 @@
             <input required v-model="not_authentic" type="radio" id="not_authentic" value="false">
             <label class="form-check-label" >לא</label>
             </div> 
-
+            <br>
             <label> למה? </label>
             <input type="text" div class="col-xs-2" id="why_not_authentic" v-model="why_not_authentic" size="10px">
             <br>
@@ -64,16 +104,19 @@ export default {
       name: "LabelComments",
     data(){
         return{
-            is_ironic: "",
-            place:"",
-            expression:"",
-            not_authentic:"",
-            why_not_authentic: "",
-            ironyType: [],
-            free_text:""
-
+            preComment:"",
+            WithPolitition: [],
+            againstPolitition:[],
+            withParty:[],
+            againstParty:[],
+            withGroup: "",
+            againstGroup: ""
         };
+    },
+    methods: {
+
     }
+    
 }
 </script>
 <style>

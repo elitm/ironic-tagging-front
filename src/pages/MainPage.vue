@@ -8,13 +8,7 @@
       <b-col>
         <LoginPage v-if="!$root.store.username"></LoginPage> 
         <span v-else>
-          <!--h3 class="tagger">Welcome tagger</h3 -->
-          <!-- <img
-            src="../assets/welcome.png"
-            width="360"
-            height="260"
-            alt
-          /> -->
+          <img src="../assets/welcome2.png" width="550" height="260" alt/>
         </span>
       </b-col>
       <b-col>

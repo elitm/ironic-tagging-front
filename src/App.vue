@@ -27,7 +27,7 @@ export default {
     background: 
   // linear-gradient(rgba(245, 201, 151, 0.89), 
   // rgba(255, 177, 87, 0.74)), 
-  url("./assets/back.jpg");
+  url("./assets/back2.jpg");
   background-repeat: no-repeat;
   background-size: cover  
 }

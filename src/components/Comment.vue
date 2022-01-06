@@ -37,11 +37,12 @@
 
         <!-- <LabelComments></LabelComments> -->
           <button type="button" @click="add">Add Expression</button>
-           <Labelcomponent
+          <LabelExpression></LabelExpression>
+           <!-- <Labelcomponent
                 v-for="(component, index) in Labelcomponent"
                 :key="index"
                 :is="component"
-            />
+            /> -->
         </b-card>
         
     </p>    
@@ -51,9 +52,11 @@
 
 <script>
 import LabelComments from "./LabelComments.vue";
+import LabelExpression from "./LabelExpression.vue";
 export default {
     components:{
-        LabelComments
+        LabelComments,
+        LabelExpression
     },
     data(){
         return{
