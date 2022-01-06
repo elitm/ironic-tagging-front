@@ -41,7 +41,7 @@ export default {
     },
     methods:{
       	add () {
-    	this.Labelcomponent.push(LabelComments)
+    	this.Labelcomponent.push(LabelExpression)
         }
     },
   name: "Comment",

@@ -46,7 +46,8 @@
 
             <option> אירוניה עצמית</option>
         </select>
-
+        <br>
+         <button type="submit" class="btn btn-primary" @click="labelExpression()">Submit</button>
     </div>
 </template>
 <script>
@@ -54,10 +55,10 @@ export default {
    name:"LabelExpression",
    data(){
        return{
-          ironicmarkers, 
-          ironicSignals,
-          positivNegativ,
-          ironicVictims
+          ironicmarkers: "", 
+          ironicSignals:[],
+          positivNegativ:"",
+          ironicVictims: []
        }
    } 
 }
