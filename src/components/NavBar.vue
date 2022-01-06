@@ -13,13 +13,15 @@
 
         <!-- <Navigator /> -->
         <button class="btn navB" type="button">
-          <router-link :to="{ name: 'main' }">Home</router-link>
+          <router-link :to="{ name: 'main' }" @click="buttonTitle = 'Categories'">Home</router-link>
         </button>
 
-         <b-dropdown id="dropdown-categories"  text="categories" class="mr-1" variant="light" >
-            <b-dropdown-item :to="{ name: 'categories' , params: {name: `acknowledgements`}}"> acknowledgements</b-dropdown-item>
-            <b-dropdown-item :to="{ name: 'categories' , params: {name: `compliments`}}"> compliments </b-dropdown-item>
-            <b-dropdown-item :to="{ name: 'categories' , params: {name: `apologies`}}"> apologies</b-dropdown-item>
+
+         <b-dropdown id="dropdown-categories"  :text="buttonTitle" class="mr-1" variant="light" >
+            <b-dropdown-item :to="{ name: 'categories' , params: {name: `acknowledgements`}}" @click="buttonTitle = 'acknowledgements'"> acknowledgements</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'categories' , params: {name: `compliments`}}" @click="buttonTitle = 'compliments'"> compliments </b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'categories' , params: {name: `apologies`}}" @click="buttonTitle = 'apologies'"> apologies</b-dropdown-item>
+
           </b-dropdown>
         <b-navbar-nav class="navbar-nav ml-auto">
  
@@ -54,6 +56,11 @@
 <script>
   export default {
     components:{
+    },
+    data () {
+      return {
+        buttonTitle: "Categories"
+      }
     },
     methods:{
         async Logout() {
