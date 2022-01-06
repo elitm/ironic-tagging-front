@@ -1,7 +1,7 @@
 <template>
-    <div dir="rtl" :class="this.category? 'categorialComment':'nonCategorialComment'">
+    <div dir="rtl" :class="parent_comment_id? 'nested_comment':'regular_comment'">
 
-        <b-card :class="parent_comment_id? 'nested_comment':'regular_comment'">
+        <b-card :class="this.category? 'categorialComment':'nonCategorialComment'">
 
         {{ date.replace('T', ' ').substring(0,16)}}
         <br>
@@ -34,7 +34,6 @@ export default {
     data(){
         return{
           Labelcomponent: [LabelExpression] ,
-          commentClassName: this.category
  
         };
     },
@@ -115,11 +114,18 @@ export default {
 }
 
 .categorialComment{
-    background-color: rgb(71, 20, 255);
+
+    border-radius:25px;
+    background-color:rgb(245, 170, 157);
+    text-align: right;
+    margin-top: 2%;
 }
 
 .nonCategorialComment{
-    background-color: rgb(255, 255, 255);
+    border-radius:25px;
+    background-color: rgb(171, 233, 241);
+    text-align: right;
+    margin-top: 2%;
 }
 
 </style>
