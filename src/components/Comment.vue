@@ -11,7 +11,7 @@
 
         <b> לייקים</b>: {{likes}}
         <b> תגוביות</b>: {{num_of_replies}}
-
+        <LabelComments></LabelComments>
         <button type="button" @click="add">Add Expression</button>
            <Labelcomponent
                 v-for="(component, index) in Labelcomponent"
@@ -25,13 +25,15 @@
 
 <script>
 import LabelComments from "./LabelComments.vue";
+import LabelExpression from "./LabelExpression.vue";
 export default {
     components:{
-        LabelComments
+        LabelComments,
+        LabelExpression
     },
     data(){
         return{
-          Labelcomponent: [LabelComments] ,
+          Labelcomponent: [LabelExpression] ,
           commentClassName: this.category
  
         };
@@ -41,7 +43,7 @@ export default {
     },
     methods:{
       	add () {
-    	this.Labelcomponent.push(LabelComments)
+    	this.Labelcomponent.push(LabelExpression)
         }
     },
   name: "Comment",
