@@ -8,7 +8,7 @@
       <b-col>
         <LoginPage v-if="!$root.store.username"></LoginPage> 
         <span v-else>
-          <img src="../assets/welcome2.png" width="550" height="260" alt/>
+          <img src="../assets/welcome2.png" width="550" height="210" alt/>
         </span>
       </b-col>
       <b-col>

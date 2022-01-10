@@ -6,13 +6,13 @@
              <label class="t">עמדה אידיאולוגית:</label>
              <br>
              <label class="t">בעד\נגד המגיב הקודם</label>
-            <select v-model="preComment">
+            <select v-model="pre_comment">
                 <option>בעד</option>
                 <option>נגד</option>
                 <option>אין התייחסות</option>
             </select>
              <label class="t"> בעד פוליטיקאי</label>
-             <select multiple data-live-search="true" v-model="WithPolitition">
+             <select multiple data-live-search="true" v-model="with_politition">
                 <option>נפתלי בנט</option>
                 <option>בני גנץ</option>
                 <option>ניצן הורוביץ</option>
@@ -22,12 +22,11 @@
                 <option>בנימין נתניהו</option>
                 <option>עמיר פרץ</option>       
                 <option>אירוניה עצמית</option>
-                <option>אחר</option>
             </select>
             <label>אם אחר</label>
-            <input type="text" v-model="otherWithPolition" size="10px"/>
+            <input type="text" v-model="other_with_polition" size="10px"/>
             <label class="t"> נגד פוליטיקאי</label>
-             <select  multiple data-live-search="true" v-model="againstPolitition">
+             <select  multiple data-live-search="true" v-model="against_politition">
                 <option>נפתלי בנט</option>
                 <option>בני גנץ</option>
                 <option>ניצן הורוביץ</option>
@@ -37,13 +36,12 @@
                 <option>בנימין נתניהו</option>
                 <option>עמיר פרץ</option>       
                 <option>אירוניה עצמית</option>
-                <option>אחר</option>
             </select>
             <label>אם אחר</label>
-            <input type="text" v-model="otherAgainstPolitition" size="10px"/> 
+            <input type="text" v-model="other_against_politition" size="10px"/> 
             <br>
             <label class="t"> בעד מפלגה</label>
-             <select multiple data-live-search="true" class="withParty" v-model="withParty">
+             <select multiple data-live-search="true" class="withParty" v-model="with_party">
                 <option>הימין החדש\ימינה</option>
                 <option>הליכוד</option>
                 <option>העבודה</option>
@@ -55,9 +53,9 @@
                 <option class="other">אחר</option>
             </select>
             <label>אם אחר</label>
-            <input type="text" v-model="otherWithParty" size="10px"/>
+            <input type="text" v-model="other_with_party" size="10px"/>
             <label class="t"> נגד מפלגה</label>
-             <select multiple data-live-search="true" class="againstParty" v-model="againstParty">
+             <select multiple data-live-search="true" class="againstParty" v-model="against_party">
                 <option>הימין החדש\ימינה</option>
                 <option>הליכוד</option>
                 <option>העבודה</option>
@@ -66,28 +64,25 @@
                 <option>יש עתיד</option>
                 <option>כחול לבן</option>
                 <option>מרץ</option>       
-                <option>אחר</option>
             </select>
             <label>אם אחר</label>
-            <input type="text" v-model="otherAgainstParty" size="10px"/> 
+            <input type="text" v-model="other_against_party" size="10px"/> 
             <label class="t">בעד מחנה\קבוצה</label> 
-            <select v-model="withGroup">
+            <select multiple data-live-search="true" class="p" v-model="with_group">
                 <option>הימין</option>
                 <option>השמאל</option>
                 <option>המרכז</option>
-                <option>אחר</option>
             </select>
             <label>אם אחר</label>
-            <input type="text" v-model="otherWithGroup" size="10px"/> 
+            <input type="text" v-model="other_with_group" size="10px"/> 
             <label class="t">נגד מחנה\קבוצה</label>
-            <select v-model="againstGroup">
+            <select multiple data-live-search="true" class="p" v-model="against_group">
                 <option>הימין</option>
                 <option>השמאל</option>
                 <option>המרכז</option>
-                <option>אחר</option>
             </select>
             <label>אם אחר</label>
-            <input type="text" v-model="otherAgainstGroup" size="10px"/> 
+            <input type="text" v-model="other_against_group" size="10px"/> 
 
             <br>
             <label class="t">חשוד כלא אותנטי (בוט, בשכר)</label>
@@ -104,7 +99,7 @@
             <label>טקסט חופשי</label>
             <textarea class="form-control" rows="1" id="free_text" v-model="free_text"/>
             <br>
-        <button type="submit" class="btn btn-primary" @click="labelComment()">Submit</button>
+        <button type="button" class="btn btn-primary" @click="labelComment()">Submit</button>
                 </div>
         </form>
     </div>
@@ -112,28 +107,68 @@
 <script>
 export default {
       name: "LabelComments",
+      props: {comment_id:{
+            type: String,
+            required: true
+      }},
     data(){
         return{
-            preComment:"",
-            WithPolitition: [],
-            againstPolitition:[],
-            withParty:[],
-            againstParty:[],
-            withGroup: "",
-            againstGroup: "",
-            otherWithPolition:"",
-            otherAgainstPolitition:"",
-            otherWithParty:"",
-            otherAgainstParty:"",
-            otherWithGroup:"",
-            otherAgainstGroup:"",
-            free_text:"",
+            pre_comment:"",
+            with_politition:[],
+            against_politition:[],
+            with_party:[],
+            against_party:[],
+            with_group:[],
+            against_group:[],
+            other_with_polition:"",
+            other_against_politition:"",
+            other_with_party:"",
+            other_against_party:"",
+            other_with_group:"",
+            other_against_group:"",
             not_authentic:"",
-            why_not_authentic:""
+            why_not_authentic:"",
+            free_text:""
         };
     },
     methods: {
-        
+        async labelComment(){
+        try {
+       console.log("label post");
+       console.log(this.comment_id);
+       console.log(this.with_politition);
+       console.log(this.other_with_polition);
+        this.axios.defaults.withCredentials = true;
+        this.with_politition.push(this.other_with_polition);
+        this.against_politition.push(this.other_against_politition);
+        this.with_party.push(this.other_with_party);
+        this.against_party.push(this.other_against_party);
+        this.with_politition.filter(n => n)
+        this.with_group.push(this.other_with_group);
+        this.against_group.push(this.other_against_group);
+        await this.axios.post(
+          "http://localhost:3000/comments/labelcomments",
+          {
+            commentId: this.comment_id,
+            pre_comment: this.pre_comment,
+            with_politition: this.with_politition,
+            against_politition: this.against_politition,
+            with_party: this.with_party,
+            against_party: this.against_party,
+            with_group: this.with_group,
+            against_group: this.against_group,
+            not_authentic: this.not_authentic,
+            why_not_authentic: this.why_not_authentic,
+            free_text: this.free_text
+          }
+        );
+     this.$root.toast("Label Post", "Post labeled successfully", "success");
+      } 
+      catch (error) {
+        console.log(error);
+        // this.$root.toast("", error.response.data, "warning");
+      }  
+        }
     }
     
 }

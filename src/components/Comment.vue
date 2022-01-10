@@ -11,7 +11,7 @@
 
         <b> לייקים</b>: {{likes}}
         <b> תגוביות</b>: {{num_of_replies}}
-        <LabelComments></LabelComments>
+        <LabelComments :comment_id = "comment_id"></LabelComments>
         <button type="button" @click="add">Add Expression</button>
            <Labelcomponent
                 v-for="(component, index) in Labelcomponent"

@@ -1,10 +1,10 @@
 <template>
     <div>
         <label> מרקרים של אירוניה </label>
-        <input type="text" div class="col-xs-2" id="ironicmarkers" v-model="ironicmarkers" size="20px">
+        <input type="text" div class="col-xs-2" id="ironicmarkers" v-model="ironic_markers" size="20px">
         <br>
         <label> אותות לאירוניה</label>
-        <select  multiple data-live-search="true" v-model="ironicSignals">
+        <select  multiple data-live-search="true" v-model="ironic_signals">
                 <option>הפרת תנאי הכנות</option>
                 <option>הפרת כלל האיכות</option>
                 <option>הפרת כלל הכמות</option>
@@ -14,12 +14,12 @@
                 <option>העמדת פנים</option>
         </select> 
         <label>אירוניה שלילית\חיובית</label> 
-        <select v-modle="positivNegativ">
+        <select v-modle="positiv_negativ">
             <option>מבע חיובי לביקורת</option>
             <option>מבע שלילי לצורך עמדה חיובית</option>
         </select>        
         <label> קורבנות האירוניה</label>
-        <select multiple data-live-search="true" v-model="ironicVictims">
+        <select multiple data-live-search="true" v-model="ironic_victims">
                 <option>נפתלי בנט</option>
                 <option>בני גנץ</option>
                 <option>ניצן הורוביץ</option>
@@ -55,10 +55,10 @@ export default {
    name:"LabelExpression",
    data(){
        return{
-          ironicmarkers: "", 
-          ironicSignals:[],
-          positivNegativ:"",
-          ironicVictims: []
+          ironic_markers: "", 
+          ironic_signals:[],
+          positiv_negativ:"",
+          ironic_victims: []
        }
    } 
 }
