@@ -1,7 +1,7 @@
 <template>
-    <div dir="rtl" :class="this.category? 'categorialComment':'nonCategorialComment'">
+    <div dir="rtl" :class="parent_comment_id? 'nested_comment':'regular_comment'">
 
-        <b-card :class="parent_comment_id? 'nested_comment':'regular_comment'">
+        <b-card :class="this.category? 'categorialComment':'nonCategorialComment'">
 
         {{ date.replace('T', ' ').substring(0,16)}}
         <br>
@@ -34,10 +34,11 @@ export default {
     data(){
         return{
           Labelcomponent: [LabelExpression] ,
-          commentClassName: this.category
-        //   category: eval("this." + this.$route.query.category)
  
         };
+    },
+    computed:{
+       category: function(){ return  eval("this." + this.$route.query.category); }
     },
     methods:{
       	add () {
@@ -89,18 +90,10 @@ export default {
         acknowledgements :{
             type: Boolean
         },
-        category:{
-            type: Boolean
-        }
-        
+
     },
 
-    mounted() {
-        console.log("this." + this.$route.query.category)
-        this.category = eval("this." + this.$route.query.category)
-        console.log(this.category)
-        console.log(typeof(this.category))
-},
+
 };
 
 </script>
@@ -114,18 +107,25 @@ export default {
 }
 .nested_comment{
     border-radius:25px;
-    background-color: rgb(171, 233, 241); /*rgb(192, 245, 232);*/
+    background-color: rgb(192, 245, 232);
     text-align: right;
     margin-right: 45px;
     margin-top: 2%;
 }
 
 .categorialComment{
-    background-color: rgb(255, 20, 20);
+
+    border-radius:25px;
+    background-color:rgb(245, 170, 157);
+    text-align: right;
+    margin-top: 2%;
 }
 
 .nonCategorialComment{
-    background-color: rgb(255, 255, 255);
+    border-radius:25px;
+    background-color: rgb(171, 233, 241);
+    text-align: right;
+    margin-top: 2%;
 }
 
 </style>
