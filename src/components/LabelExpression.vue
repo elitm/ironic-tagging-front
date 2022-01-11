@@ -28,7 +28,6 @@
                 <option>מרב מיכאלי</option>
                 <option>בנימין נתניהו</option>
                 <option>עמיר פרץ</option>       
-                <option>אחר</option> 
 
                 <option>הימין החדש\ימינה</option>
                 <option>הליכוד</option>
@@ -38,7 +37,6 @@
                 <option>יש עתיד</option>
                 <option>כחול לבן</option>
                 <option>מרץ</option>       
-                <option>אחר</option>
 
                 <option>הימין</option>
                 <option>השמאל</option>
@@ -47,20 +45,55 @@
             <option> אירוניה עצמית</option>
         </select>
         <br>
-         <button type="submit" class="btn btn-primary" @click="labelExpression()">Submit</button>
+         <button type="button" class="btn btn-primary" @click="labelExpression()">Submit</button>
     </div>
 </template>
 <script>
 export default {
    name:"LabelExpression",
+   props: {
+       comment_id:{
+            type: String,
+            required: true
+      }},
    data(){
+
        return{
           ironic_markers: "", 
           ironic_signals:[],
           positiv_negativ:"",
           ironic_victims: []
        }
-   } 
+   },
+   methods: {
+       async labelExpression(){
+        try {
+       console.log("label exp");
+       console.log(this.comment_id);
+
+        this.axios.defaults.withCredentials = true;
+
+        await this.axios.post(
+          "http://localhost:3000/expressions/labelExpressions",
+          {
+            category: this.$route.query.category,
+            comment_id: this.comment_id,
+            ironic_markers: this.ironic_markers,
+            ironic_signals: this.ironic_signals,
+            positiv_negativ: this.positiv_negativ,
+            ironic_victims: this.ironic_victims
+   
+          }
+        );
+     this.$root.toast("Label Expression", "Expression labeled successfully", "success");
+      } 
+      catch (error) {
+        console.log(error);
+        // this.$root.toast("", error.response.data, "warning");
+      }  
+        }
+   },
+   
 }
 </script>
 <style>

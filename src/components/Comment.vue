@@ -13,7 +13,7 @@
         <b> תגוביות</b>: {{num_of_replies}}
         <LabelComments :comment_id = "comment_id"></LabelComments>
         <button type="button" @click="add">Add Expression</button>
-           <Labelcomponent
+           <Labelcomponent :comment_id = "comment_id"
                 v-for="(component, index) in Labelcomponent"
                 :key="index"
                 :is="component"
