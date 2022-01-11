@@ -111,14 +111,14 @@ export default {
     },
     async Register() {
       try {
-        // const response = await this.axios.post(
-        //   "http://localhost:3003/Register",
-        //   {
-        //     username: this.form.username,
-        //     password: this.form.password,
+        const response = await this.axios.post(
+          "http://localhost:3000/Register",
+          {
+            username: this.form.username,
+            password: this.form.password,
 
-        //   }
-        // );
+          }
+        );
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {
