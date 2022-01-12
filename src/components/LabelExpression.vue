@@ -14,7 +14,7 @@
                 <option>העמדת פנים</option>
         </select> 
         <label>אירוניה שלילית\חיובית</label> 
-        <select v-modle="positiv_negativ">
+        <select v-model="positiv_negativ">
             <option>מבע חיובי לביקורת</option>
             <option>מבע שלילי לצורך עמדה חיובית</option>
         </select>        
@@ -69,7 +69,7 @@ export default {
        async labelExpression(){
         try {
        console.log("label exp");
-       console.log(this.comment_id);
+       console.log(this.positiv_negativ);
 
         this.axios.defaults.withCredentials = true;
 
