@@ -57,7 +57,7 @@
             <label>טקסט חופשי</label>
             <textarea class="form-control" rows="3" id="free_text" v-model="free_text"/>
         </div>
-        <button type="submit" class="btn btn-primary"  @click="labelPost()">Submit</button>
+        <button type="button" class="btn btn-primary"  @click="labelPost()">Submit</button>
         </form>
     </div>
 </template>
@@ -80,8 +80,10 @@ export default {
        console.log("label post");
         this.axios.defaults.withCredentials = true;
         await this.axios.post(
-          "http://localhost:3000/posts/labelPost",
+          // "https://localhost:443/posts/labelPost",
+          this.$root.store.beginning_url.concat(`posts/labelPost`),
           {
+            username: this.$root.store.username,
             postId: this.$route.params.id,
             subject: this.subject,
             style: this.style,
@@ -93,7 +95,7 @@ export default {
       } 
       catch (error) {
         console.log(error);
-        // this.$root.toast("", error.response.data, "warning");
+        this.$root.toast("Label Post", "Post was not labeled", "warning");
       }
   }
   },

@@ -4,7 +4,8 @@
     <b-container> 
       <b-row>
     <PostPreview
-        v-for="p in posts"
+        v-for="(p, index) in posts"
+        :index= index
         :postId="p.post_id"
         :date="p.created_time"
         :category="$route.params.category"
@@ -33,8 +34,8 @@ export default {
       try {
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.get(
-          `http://localhost:3000/posts/getPostsOfPolitician/${politicianName}`,
-            
+          // `https://localhost:443/posts/getPostsOfPolitician/${politicianName}`,
+         this.$root.store.beginning_url.concat(`posts/getPostsOfPolitician/${politicianName}`),
         );
         const posts = response.data;
         if (typeof (response.data) !== 'string')          
@@ -42,24 +43,20 @@ export default {
         this.posts = [];
         this.posts.push(...posts);
         this.name = politicianName;
-        
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.log(error);
-        // this.$root.toast("Favorite Games", error.response.data, "alert");
       }
     }
   }, 
   watch: {
 			    '$route' () {
 			      	this.getPoliticianPosts(this.$route.params.name)
-					
 			    },
 			  }, 
   mounted(){
-    console.log("politician posts mounted");
-    this.getPoliticianPosts(this.$route.params.name); 
-    console.log(this.$route.params.category)
+    this.getPoliticianPosts(this.$route.params.name);
   }
 };
 

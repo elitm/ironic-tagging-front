@@ -94,9 +94,10 @@ export default {
     async Login() {
       try {
         console.log("start axisos");
-        this.axios.defaults.withCredentials = true;
+        this.axios.defaults.withCredentials = false;
         const response = await this.axios.post(
-          "http://localhost:3000/Login",
+          // "https://localhost:443/Login",
+          this.$root.store.beginning_url.concat(`Login`),
           {
             username: this.form.username,
             password: this.form.password
@@ -106,7 +107,7 @@ export default {
         this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$router.push("/");
+        // this.$router.push("/");
       } catch (err) {
         console.log(err.response);
         console.log(err.response.data);

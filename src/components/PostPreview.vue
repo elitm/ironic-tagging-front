@@ -3,7 +3,7 @@
       <b-card class="Bcard">
     <div >
       <router-link :to="{ name: 'posts' , params: {id: `${this.postId}`}, query: {category: this.category}}">
-          <b>{{ postId }}</b> 
+          <b>Post #{{ index + 1 }}</b> 
        </router-link>
     </div >
     <p> date: {{ date.replace('T', ' ').substring(0,16) }} </p>
@@ -15,6 +15,10 @@
 export default {
   name: "PostPreview",
   props: {
+      index: {
+        type: Number,
+        required: true
+      },
       postId: {
         type: String,
         required: true

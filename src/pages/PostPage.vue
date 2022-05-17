@@ -2,12 +2,16 @@
 <div>
   <b-card class="post">
     <Post></Post>
+    <br v-if="commentInCategoryExist">
+    <div class="hasCategoryComment" v-if="commentInCategoryExist">{{this.$route.query.category}} קיימות תגובות שזוהו בקטגוריה</div>
+    <br v-if="commentInCategoryExist">
     <LabelPost> </LabelPost>
   </b-card>
   <br>
   <br>
-    <Comment
-        v-for="c in comments"
+    <Comment @markerExists="showMarker"
+        v-for="(c, comment_index_in_webpage) in comments"
+        :comment_index_in_webpage= comment_index_in_webpage
         :commenter_name="c.commenter_name"
         :message="c.message"
         :comment_url="c.comment_url"
@@ -18,7 +22,7 @@
         :comment_id="c.comment_id"
         :post_id="c.post_id"
         :parent_comment_id="c.parent_comment_id"
-        :acknowledgements="c.thanks_expression"
+        :acknowledgements="c.acknowledgements"
         :key="c.comment_id">
     </Comment>
 </div>
@@ -36,16 +40,17 @@ export default {
   },
     data() {
         return {
-        comments: []
-            };
+          commentInCategoryExist: false,
+          comments: []
+        };
   },
   methods: {
     async getCommentsOfPost(postId){
       try {
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.get(
-          `http://localhost:3000/comments/getCommentsOfPost/${postId}`,
-            
+          // `https://localhost:443/comments/getCommentsOfPost/${postId}`,
+          this.$root.store.beginning_url.concat(`comments/getCommentsOfPost/${postId}`),
         );
         const comments = response.data;
         if (typeof (response.data) !== 'string')          
@@ -58,22 +63,32 @@ export default {
         console.log(error);
       }
     },
- 
+
+    showMarker(){
+      this.commentInCategoryExist = true;
+    },
+  
   },
-     mounted(){
-        console.log("mounted postPage")
-        this.getCommentsOfPost(this.$route.params.id);
-  }};
+  mounted(){
+    this.getCommentsOfPost(this.$route.params.id);
+    }
+  };
 
   
 </script>
 
 <style lang="scss" scoped>
-.post{
-    margin: 4%,10%,4%,4%;
+.post {
     border-radius:65px;
     background-color: rgb(176, 202, 250);
     text-align: right;
   
+}
+
+.hasCategoryComment {
+  background-color:rgb(245, 170, 157) !important;
+  text-align: center;
+  font-weight: bold;
+  border-radius:25px;
 }
 </style>

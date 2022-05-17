@@ -7,6 +7,7 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
+  // mode: 'history',
   routes
 });
 
@@ -71,9 +72,10 @@ axios.interceptors.response.use(
 
 Vue.use(VueAxios, axios);
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 const shared_data = {
+  beginning_url: "https://irony.cs.bgu.ac.il/",
   username: localStorage.username,
   login(username) {
     localStorage.setItem("username", username);

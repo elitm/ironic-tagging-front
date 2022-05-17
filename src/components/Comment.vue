@@ -2,7 +2,8 @@
     <div dir="rtl" :class="parent_comment_id? 'nested_comment':'regular_comment'">
 
         <b-card :class="this.category? 'categorialComment':'nonCategorialComment'">
-
+        <b> #{{comment_index_in_webpage + 1}} </b>
+        <br>
         {{ date.replace('T', ' ').substring(0,16)}}
         <br>
         <a :href="commenter_url" target="_blank">{{commenter_name}}</a>:
@@ -11,42 +12,79 @@
 
         <b> לייקים</b>: {{likes}}
         <b> תגוביות</b>: {{num_of_replies}}
-        <LabelComments :comment_id = "comment_id"></LabelComments>
-        <button type="button" @click="add">Add Expression</button>
+        <br>
+        <center>
+            <h3>תיוג תגובה</h3>
+        </center>
+
+        <LabelComments :comment_id = "comment_id" :comment_index_in_webpage = "comment_index_in_webpage"></LabelComments>
+       
+        <center>
+            <h3>תיוג מבע אירוני</h3>
+        </center>
+        <br>
+        <button type="button" @click="add">Add Ironic Expression</button>
+        <br>
            <Labelcomponent :comment_id = "comment_id"
-                v-for="(component, index) in Labelcomponent"
+                v-for="(component, index) in Labelcomponent" 
                 :key="index"
                 :is="component"
             />
-        </b-card>      
-
+        <br>
+        <center>
+            <h3>תיוג מבע לא אירוני</h3>
+        </center>
+        <br>
+        <button type="button" @click="add_no_ironic">Add Non Ironic Expression</button>
+        <br>
+           <LabedcomponentNoIronic :comment_id = "comment_id"
+                v-for="(component, index) in LabedcomponentNoIronic" 
+                :key="index"
+                :is="component"
+            />
+        </b-card>
     </div>
 </template>
 
 <script>
 import LabelComments from "./LabelComments.vue";
 import LabelExpression from "./LabelExpression.vue";
+import LabedExpressionNoIronic from "./LabelExpressionNoIronic.vue"
 export default {
     components:{
         LabelComments,
-        LabelExpression
+        LabelExpression,
+        LabedExpressionNoIronic,
     },
     data(){
         return{
-          Labelcomponent: [LabelExpression] ,
- 
+            Labelcomponent: [LabelExpression] ,
+            LabedcomponentNoIronic: [LabedExpressionNoIronic]
         };
     },
     computed:{
-       category: function(){ return  eval("this." + this.$route.query.category); }
+       category: function(){
+            let result = this[this.$route.query.category];
+            if (result){
+               this.$emit('markerExists');
+            }
+            return result;
+        }
     },
     methods:{
       	add () {
-    	this.Labelcomponent.push(LabelExpression)
+    	    this.Labelcomponent.push(LabelExpression) 
+        },
+        add_no_ironic(){
+            this.LabedcomponentNoIronic.push(LabedExpressionNoIronic)
         }
     },
   name: "Comment",
   props:{
+        comment_index_in_webpage:{
+            type: Number,
+            required: true
+        },
         commenter_name:{
             type: String,
             required: true

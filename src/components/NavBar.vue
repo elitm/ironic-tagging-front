@@ -17,7 +17,7 @@
         </button>
 
 
-         <b-dropdown id="dropdown-categories"  :text="buttonTitle" class="mr-1" variant="light" >
+         <b-dropdown id="dropdown-categories" v-if="this.$root.store.username" :text="buttonTitle" class="mr-1" variant="light" >
             <b-dropdown-item :to="{ name: 'categories' , params: {name: `acknowledgements`}}" @click="buttonTitle = 'acknowledgements'"> acknowledgements</b-dropdown-item>
             <b-dropdown-item :to="{ name: 'categories' , params: {name: `compliments`}}" @click="buttonTitle = 'compliments'"> compliments </b-dropdown-item>
             <b-dropdown-item :to="{ name: 'categories' , params: {name: `apologies`}}" @click="buttonTitle = 'apologies'"> apologies</b-dropdown-item>
@@ -39,11 +39,9 @@
         </span>
         <span v-else>
           <b-dropdown id="dropdown-1"  text="My Profile" class="mr-3" variant="light" >
-            <!-- <b-dropdown-item :to="{ name: 'favoriteGames' }">My Favorite Games</b-dropdown-item> -->
-            <b-dropdown-item class="btn navB" @click="Logout">Logout</b-dropdown-item>
+            <b-dropdown-item class="btn navB" id="logout-nav" @click="Logout">Logout</b-dropdown-item>
           </b-dropdown>
          <B>Hello {{ $root.store.username }}</B>
-          
         </span>
         </b-navbar-nav>
       </b-navbar>
@@ -55,8 +53,6 @@
 
 <script>
   export default {
-    components:{
-    },
     data () {
       return {
         buttonTitle: "Categories"
@@ -67,7 +63,9 @@
         console.log("try to logging out");
         try{
           await this.axios.post(
-            "http://localhost:3000/logout",{withCredentials:true});
+            // "https://localhost:443/logout",
+            this.$root.store.beginning_url.concat("logout"),
+            {withCredentials:true});
 
           this.$root.store.logout();
           this.$root.toast("Logout", "User logged out successfully", "success");
@@ -79,9 +77,10 @@
           console.log("error in logout")
           console.log(error)
         }
-    }, 
+    }
+  }
 
-  }};
+  };
 </script>
 
 <style>

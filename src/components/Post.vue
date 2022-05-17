@@ -16,15 +16,12 @@
         <b> שיתופים</b>: {{num_of_shares}}
         <b> לייקים</b>: {{num_of_reactions}}
         <br>
-        👍: {{like}}
+        👍: {{likes}}
         😆: {{haha}}
         😡: {{angry}}
         😮: {{wow}}
         ❤️: {{love}}
         ☹️: {{sad}}
-        <br>
-        <br>
-        <br>
     </div>
 </template>
 
@@ -43,7 +40,7 @@ export default {
             num_of_comments:"",
             num_of_shares:"",
             num_of_reactions:"",
-            like:"",
+            likes:"",
             haha:"",
             angry:"",
             wow:"",
@@ -55,7 +52,9 @@ export default {
         async getPost(postId){
             try{
             const response = await this.axios.get(
-                `http://localhost:3000/posts/getPostFromId/${postId}`,);
+                // `https://localhost:443/posts/getPostFromId/${postId}`,
+                this.$root.store.beginning_url.concat(`posts/getPostFromId/${postId}`),
+            );
             this.post_id = response.data[0].post_id;
             this.politician_name = response.data[0].politician_name;
             this.message = response.data[0].message;
@@ -66,7 +65,7 @@ export default {
             this.num_of_comments = response.data[0].num_of_comments,
             this.num_of_shares = response.data[0].num_of_shares,
             this.num_of_reactions = response.data[0].num_of_reactions,
-            this.like = response.data[0].like,
+            this.likes = response.data[0].likes,
             this.haha = response.data[0].haha,
             this.angry = response.data[0].angry,
             this.wow = response.data[0].wow,
